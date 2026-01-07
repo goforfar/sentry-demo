@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.0</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.example</groupId>
+    <artifactId>sentry-demo</artifactId>
+    <version>1.0.0</version>
+    <name>sentry-demo</name>
+    <description>Spring Boot 3 Demo Project</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- Spring Boot Web Starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Actuator for health checks -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Lombok for reducing boilerplate code -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Spring Boot DevTools for development -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Spring Boot Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.sentry</groupId>
+            <artifactId>sentry-async-profiler</artifactId>
+            <version>8.29.0</version>
+        </dependency>
+    </dependencies>
+
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.sentry</groupId>
+                <artifactId>sentry-maven-plugin</artifactId>
+                <version>0.10.0</version>
+                <!-- Required to allow auto-install of Sentry SDK and Integrations -->
+                <extensions>true</extensions>
+                <configuration>
+                    <!-- In case you're self hosting, provide the URL here -->
+                    <!-- <url>http://localhost:8000/</url> -->
+                    <org>lizhi-ny</org>
+                    <project>java-spring-boot</project>
+                    <!-- Do not commit your auth token with this file, you should provide it via the SENTRY_AUTH_TOKEN environment variable or similar -->
+                    <!-- <authToken>${env.SENTRY_AUTH_TOKEN}</authToken> -->
+                    <authToken>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</authToken>
+                    <!-- Enable debugging to see logs in case something goes wrong when uploading the source bundle -->
+                    <debugSentryCli>true</debugSentryCli>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!-- Generates a source bundle and uploads it to Sentry -->
+                            <!-- This enables source context, allowing you to see your source code as part of your stack traces in Sentry -->
+                            <!-- Learn more about this feature in its dedicated "Source Context" docs page -->
+                            <goal>uploadSourceBundle</goal>
+                            <!--  Validates Sentry SDK dependency versions. -->
+                            <!--  Mixing SDK dependency versions can result in build or run time errors. -->
+                            <!--  If mixed versions are detected, the build will fail. -->
+                            <goal>validateSdkDependencyVersions</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
