@@ -55,4 +55,25 @@ public class HelloController {
         Map<String, String> response = new HashMap<>();
         return response;
     }
+
+
+    @GetMapping("/crash2")
+    public Map<String, String> crashNotCatch() throws Exception {
+        throw new Exception("crashNotCatch");
+    }
+
+    @GetMapping("/crash3")
+    public Map<String, String> crashNotCatch_Condition(@RequestParam Boolean did) throws Exception {
+        if (did){
+            crashNotCatch(did);
+        }
+        Map<String, String> response = new HashMap<>();
+        return response;
+    }
+
+    private void crashNotCatch(boolean did) throws Exception {
+        if (did){
+            throw new Exception("crashNotCatch");
+        }
+    }
 }
