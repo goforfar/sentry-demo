@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sentry.Sentry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class TestController {
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplateBuilder restTemplateBuilder;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private static final String BASE_URL = "http://8c7bbbba95c1025975e548cee86dfadc.nebulab.app";
 
@@ -120,12 +121,17 @@ public class TestController {
 
     /**
      * 发送HTTP请求
+     * 使用 RestTemplateBuilder 创建的 RestTemplate 会被 Sentry 自动注入拦截器
+     * 每次请求会自动创建 HTTP Client Span，并在请求头中注入 sentry-trace 以支持分布式追踪
      */
     private Map<String, Object> sendRequest(ApiRequest apiRequest) {
         Map<String, Object> response = new HashMap<>();
         long startTime = System.currentTimeMillis();
 
         try {
+            // 使用 RestTemplateBuilder 创建 RestTemplate，Sentry 会自动注入拦截器
+            RestTemplate restTemplate = restTemplateBuilder.build();
+
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 

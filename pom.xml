@@ -73,7 +73,14 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Sentry -->
+        <!-- Sentry JDBC - 用于数据库查询 Span 追踪 -->
+        <dependency>
+            <groupId>io.sentry</groupId>
+            <artifactId>sentry-jdbc</artifactId>
+            <version>8.29.0</version>
+        </dependency>
+
+        <!-- Sentry Async Profiler -->
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-async-profiler</artifactId>
@@ -108,9 +115,12 @@
                     <!-- <url>http://localhost:8000/</url> -->
                     <org>lizhi-ny</org>
                     <project>java-spring-boot</project>
+                    <authToken>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</authToken>
                     <!-- Do not commit your auth token with this file, you should provide it via the SENTRY_AUTH_TOKEN environment variable or similar -->
                     <!-- <authToken>${env.SENTRY_AUTH_TOKEN}</authToken> -->
-                    <authToken>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</authToken>
+<!--                    <org>sentry</org>-->
+<!--                    <project>local-pro</project>-->
+<!--                    <authToken>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</authToken>-->
                     <!-- Enable debugging to see logs in case something goes wrong when uploading the source bundle -->
                     <debugSentryCli>true</debugSentryCli>
                 </configuration>
