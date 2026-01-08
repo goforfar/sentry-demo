@@ -12,6 +12,7 @@ import requests
 
 # 配置
 BASE_URL = "http://localhost:8080"
+# BASE_URL = "http://8c7bbbba95c1025975e548cee86dfadc.nebulab.app"
 MIN_DELAY = 0.5  # 最小请求间隔（秒）
 MAX_DELAY = 2.0  # 最大请求间隔（秒）
 
