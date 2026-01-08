@@ -184,9 +184,7 @@ public class UserService {
                 .orElseThrow(() -> {
                     String errorMsg = "该用户不存在: " + id;
                     log.error(errorMsg);
-                    log.error("新err msg {}",errorMsg);
                     RuntimeException exception = new RuntimeException(errorMsg);
-
                     return exception;
                 });
     }
