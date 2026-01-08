@@ -182,8 +182,9 @@ public class UserService {
         log.info("查询用户ID: {}", id);
         return userRepository.findById(id)
                 .orElseThrow(() -> {
-                    String errorMsg = "用户不存在: " + id;
+                    String errorMsg = "该用户不存在: " + id;
                     log.error(errorMsg);
+                    log.error("新err msg {}",errorMsg);
                     RuntimeException exception = new RuntimeException(errorMsg);
 
                     return exception;
