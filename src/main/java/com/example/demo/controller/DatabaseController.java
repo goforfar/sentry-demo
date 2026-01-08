@@ -36,7 +36,7 @@ public class DatabaseController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("创建用户失败", e);
-            Sentry.captureException(e);
+            
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "创建失败: " + e.getMessage());
@@ -61,7 +61,7 @@ public class DatabaseController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("批量创建失败", e);
-            Sentry.captureException(e);
+            
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "批量创建失败: " + e.getMessage());
@@ -85,7 +85,7 @@ public class DatabaseController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("批量创建失败，事务已回滚", e);
-            Sentry.captureException(e);
+            
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "批量创建失败，事务已回滚: " + e.getMessage());
@@ -109,7 +109,7 @@ public class DatabaseController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("创建用户失败，业务验证未通过", e);
-            Sentry.captureException(e);
+            
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "业务验证失败: " + e.getMessage());
@@ -133,7 +133,7 @@ public class DatabaseController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("创建用户失败，运行时异常导致事务回滚", e);
-            Sentry.captureException(e);
+            
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "运行时异常，事务已回滚: " + e.getMessage());
@@ -156,7 +156,7 @@ public class DatabaseController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("复杂事务执行失败，事务已回滚", e);
-            Sentry.captureException(e);
+            
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "复杂事务执行失败，事务已回滚: " + e.getMessage());
@@ -180,7 +180,7 @@ public class DatabaseController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("查询用户失败", e);
-            Sentry.captureException(e);
+            
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "查询失败: " + e.getMessage());
@@ -203,7 +203,7 @@ public class DatabaseController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("查询用户失败", e);
-            Sentry.captureException(e);
+            
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "查询失败: " + e.getMessage());
@@ -234,7 +234,7 @@ public class DatabaseController {
                     });
         } catch (Exception e) {
             log.error("查询用户失败", e);
-            Sentry.captureException(e);
+            
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "查询失败: " + e.getMessage());
@@ -258,7 +258,7 @@ public class DatabaseController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("更新用户失败", e);
-            Sentry.captureException(e);
+            
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "更新失败: " + e.getMessage());
@@ -281,7 +281,7 @@ public class DatabaseController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("删除用户失败", e);
-            Sentry.captureException(e);
+            
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "删除失败: " + e.getMessage());
@@ -305,7 +305,7 @@ public class DatabaseController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("数据库操作超时", e);
-            Sentry.captureException(e);
+            
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "操作超时: " + e.getMessage());
@@ -329,7 +329,7 @@ public class DatabaseController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("并发修改冲突", e);
-            Sentry.captureException(e);
+            
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "并发修改冲突: " + e.getMessage());

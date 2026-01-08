@@ -54,3 +54,5 @@ sentry:
   # of transactions for tracing.
   # We recommend adjusting this value in production.
   traces-sample-rate: 1.0
+  profile-session-sample-rate: 1.0
+  profile-lifecycle: TRACE

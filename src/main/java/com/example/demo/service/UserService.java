@@ -55,7 +55,7 @@ public class UserService {
             return userRepository.saveAll(users);
         } catch (Exception e) {
             log.error("批量创建失败，事务回滚", e);
-            Sentry.captureException(e);
+
             throw e;
         }
     }
@@ -72,7 +72,7 @@ public class UserService {
             String errorMsg = "用户名已存在: " + user.getUsername();
             log.error(errorMsg);
             IllegalStateException exception = new IllegalStateException(errorMsg);
-            Sentry.captureException(exception);
+
             throw exception;
         }
 
@@ -81,7 +81,7 @@ public class UserService {
             String errorMsg = "邮箱已存在: " + user.getEmail();
             log.error(errorMsg);
             IllegalStateException exception = new IllegalStateException(errorMsg);
-            Sentry.captureException(exception);
+
             throw exception;
         }
 
@@ -90,7 +90,7 @@ public class UserService {
             String errorMsg = "年龄必须在18-120之间: " + user.getAge();
             log.error(errorMsg);
             IllegalArgumentException exception = new IllegalArgumentException(errorMsg);
-            Sentry.captureException(exception);
+
             throw exception;
         }
 
@@ -108,10 +108,10 @@ public class UserService {
 
         // 模拟后续处理中发生异常
         if (user.getUsername().contains("error")) {
-            String errorMsg = "模拟运行时异常：用户名包含error关键字";
+            String errorMsg = "模拟运行时异常：用户名包含error关键字-no";
+
             log.error(errorMsg);
             RuntimeException exception = new RuntimeException(errorMsg);
-            Sentry.captureException(exception);
             throw exception;
         }
 
@@ -162,7 +162,7 @@ public class UserService {
 
         } catch (Exception e) {
             log.error("复杂事务场景执行失败，事务回滚", e);
-            Sentry.captureException(e);
+
             throw e;
         }
     }
@@ -185,7 +185,7 @@ public class UserService {
                     String errorMsg = "用户不存在: " + id;
                     log.error(errorMsg);
                     RuntimeException exception = new RuntimeException(errorMsg);
-                    Sentry.captureException(exception);
+
                     return exception;
                 });
     }
@@ -209,7 +209,7 @@ public class UserService {
                     String errorMsg = "用户不存在: " + id;
                     log.error(errorMsg);
                     RuntimeException exception = new RuntimeException(errorMsg);
-                    Sentry.captureException(exception);
+
                     return exception;
                 });
 
@@ -235,7 +235,7 @@ public class UserService {
                     String errorMsg = "用户不存在: " + id;
                     log.error(errorMsg);
                     RuntimeException exception = new RuntimeException(errorMsg);
-                    Sentry.captureException(exception);
+
                     return exception;
                 });
 
@@ -254,7 +254,7 @@ public class UserService {
             return userRepository.save(user);
         } catch (InterruptedException e) {
             log.error("数据库操作被中断", e);
-            Sentry.captureException(e);
+
             Thread.currentThread().interrupt();
             throw new RuntimeException("操作被中断", e);
         }
@@ -279,7 +279,7 @@ public class UserService {
             return userRepository.save(user);
         } catch (Exception e) {
             log.error("并发修改冲突", e);
-            Sentry.captureException(e);
+
             throw new RuntimeException("并发修改冲突", e);
         }
     }

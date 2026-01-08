@@ -56,7 +56,7 @@ public class TestController {
 
             } catch (Exception e) {
                 log.error("请求失败", e);
-                Sentry.captureException(e);
+                
                 failureCount++;
                 Map<String, Object> errorResponse = new HashMap<>();
                 errorResponse.put("error", e.getMessage());
@@ -102,7 +102,7 @@ public class TestController {
 
             } catch (Exception e) {
                 log.error("请求失败", e);
-                Sentry.captureException(e);
+                
                 errorCount++;
                 Map<String, Object> errorResponse = new HashMap<>();
                 errorResponse.put("error", e.getMessage());

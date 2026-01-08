@@ -52,7 +52,7 @@ public class HelloController {
         } catch (Exception e) {
             Sentry.logger().info("This is a test log.");
             Sentry.logger().error("This is a test error log.");
-            Sentry.captureException(e);
+            
         }
         Map<String, String> response = new HashMap<>();
         return response;
