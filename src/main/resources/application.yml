@@ -46,6 +46,7 @@ logging:
     io.sentry: DEBUG
 
 sentry:
+#  dsn: http://bc56ff44f0fb886609c8aa2b08124b78@192.168.0.99:9000/3
   dsn: https://13721a440e641634c7897544a16ca1b7@o4510666582982656.ingest.us.sentry.io/4510667645648896
 #  dsn: http://e560a1f41f182a9da26ee73102f1239f@127.0.0.1:9000/2
   # Add data like request headers and IP for users,

@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(mvn clean install:*)"
+      "Bash(mvn clean install:*)",
+      "Bash(mvn clean compile:*)",
+      "Bash(curl:*)",
+      "Bash(lsof:*)",
+      "Bash(mvn spring-boot:run:*)",
+      "Bash(python3:*)"
     ]
   }
 }
