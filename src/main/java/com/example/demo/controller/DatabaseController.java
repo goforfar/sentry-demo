@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.User;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.service.UserService;
 import io.sentry.Sentry;
 import lombok.RequiredArgsConstructor;
@@ -201,6 +202,13 @@ public class DatabaseController {
             response.put("success", true);
             response.put("data", user);
             return ResponseEntity.ok(response);
+        } catch (UserNotFoundException e) {
+            log.error("查询用户失败", e);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "查询失败: " + e.getMessage());
+            return ResponseEntity.status(404).body(response);
         } catch (Exception e) {
             log.error("查询用户失败", e);
             
@@ -256,6 +264,13 @@ public class DatabaseController {
             response.put("message", "用户更新成功");
             response.put("data", updatedUser);
             return ResponseEntity.ok(response);
+        } catch (UserNotFoundException e) {
+            log.error("更新用户失败", e);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "更新失败: " + e.getMessage());
+            return ResponseEntity.status(404).body(response);
         } catch (Exception e) {
             log.error("更新用户失败", e);
             
@@ -279,6 +294,13 @@ public class DatabaseController {
             response.put("success", true);
             response.put("message", "用户删除成功");
             return ResponseEntity.ok(response);
+        } catch (UserNotFoundException e) {
+            log.error("删除用户失败", e);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "删除失败: " + e.getMessage());
+            return ResponseEntity.status(404).body(response);
         } catch (Exception e) {
             log.error("删除用户失败", e);
             
@@ -327,6 +349,13 @@ public class DatabaseController {
             response.put("message", "并发修改测试完成");
             response.put("data", updatedUser);
             return ResponseEntity.ok(response);
+        } catch (UserNotFoundException e) {
+            log.error("并发修改冲突", e);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "并发修改冲突: " + e.getMessage());
+            return ResponseEntity.status(404).body(response);
         } catch (Exception e) {
             log.error("并发修改冲突", e);
             
