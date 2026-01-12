@@ -24,6 +24,8 @@ public class TestController {
     private final ObjectMapper objectMapper = new ObjectMapper();
 //    private static final String BASE_URL = "http://8c7bbbba95c1025975e548cee86dfadc.nebulab.app";
     private static final String BASE_URL = "http://localhost:8080";
+    public void metric(){
+    }
 
     /**
      * 随机访问项目的其他endpoint
