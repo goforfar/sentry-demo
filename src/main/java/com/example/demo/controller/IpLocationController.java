@@ -34,7 +34,7 @@ public class IpLocationController {
     @GetMapping("/location")
     public ResponseEntity<IpLocation> getIpLocation(@RequestParam("ip") String ip) {
         log.info("收到IP地址查询请求: {}", ip);
-
+        ip = null;
         IpLocation location = ipLocationService.getIpLocation(ip);
 
         if ("fail".equals(location.getStatus())) {
