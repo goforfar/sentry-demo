@@ -44,6 +44,14 @@ public class HelloController {
         return response;
     }
 
+    @GetMapping("/hello1")
+    public Map<String, String> health1() {
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "UP");
+        response.put("application", "sentry-demo");
+        return response;
+    }
+
 
     @GetMapping("/crash")
     public Map<String, String> crash() {
@@ -52,7 +60,7 @@ public class HelloController {
         } catch (Exception e) {
             Sentry.logger().info("This is a test log.");
             Sentry.logger().error("This is a test error log.");
-            
+
         }
         Map<String, String> response = new HashMap<>();
         return response;
