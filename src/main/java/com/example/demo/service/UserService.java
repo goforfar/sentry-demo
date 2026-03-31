@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.User;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.repository.UserRepository;
 import io.sentry.Sentry;
 import lombok.RequiredArgsConstructor;
@@ -184,7 +185,7 @@ public class UserService {
                 .orElseThrow(() -> {
                     String errorMsg = "该用户不存在: " + id;
                     log.error(errorMsg);
-                    RuntimeException exception = new RuntimeException(errorMsg);
+                    UserNotFoundException exception = new UserNotFoundException(id);
                     return exception;
                 });
     }
@@ -207,7 +208,7 @@ public class UserService {
                 .orElseThrow(() -> {
                     String errorMsg = "用户不存在: " + id;
                     log.error(errorMsg);
-                    RuntimeException exception = new RuntimeException(errorMsg);
+                    UserNotFoundException exception = new UserNotFoundException(id);
 
                     return exception;
                 });
@@ -233,7 +234,7 @@ public class UserService {
                 .orElseThrow(() -> {
                     String errorMsg = "用户不存在: " + id;
                     log.error(errorMsg);
-                    RuntimeException exception = new RuntimeException(errorMsg);
+                    UserNotFoundException exception = new UserNotFoundException(id);
 
                     return exception;
                 });
@@ -267,7 +268,7 @@ public class UserService {
         log.info("模拟并发修改异常，用户ID: {}", id);
 
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("用户不存在: " + id));
+                .orElseThrow(() -> new UserNotFoundException(id));
 
         // 模拟另一个事务已经修改了数据
         user.setEmail(newEmail + "_concurrent");
